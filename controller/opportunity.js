@@ -543,8 +543,9 @@ const transporter = nodemailer.createTransport({
 const sendEmailAlert = (alertDetails) => {
   const mailOptions = {
     from: `${process.env.SMPT_MAIL}`,
-    to: "madhu.i@techsa.net",
-    cc: "himani.g@techsa.net, sanjiv.s@techsa.net",
+    to: "mihir.b@techsa.net",
+    // to: "madhu.i@techsa.net",
+    // cc: "himani.g@techsa.net, sanjiv.s@techsa.net",
     subject: "Opportunity Expiry Alert",
     text: `
     An opportunity has arisen for ${alertDetails.customer_entity} to acquire ${alertDetails.description} in ${alertDetails.type} for the ${alertDetails.License_type} license type. These licenses are set to expire in ${alertDetails.daysLeft} days, on ${alertDetails.license_to}.

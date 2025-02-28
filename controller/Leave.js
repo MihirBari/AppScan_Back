@@ -314,8 +314,8 @@ const sendEmail = async (leaveId, name, surname, fromDate, toDate, days) => {
 
     const mailOptions = {
       from: `"Techsa CRM" <${process.env.SMPT_MAIL}>`,
-      //to: "mihir.b@techsa.net",
-      to: "ravi.k@techsa.net, sanjiv.s@techsa.net",
+      to: "mihir.b@techsa.net",
+      //to: "ravi.k@techsa.net, sanjiv.s@techsa.net",
       subject: `Leave Application Confirmation - ${rows[0].name} ${rows[0].surname} `,
       text: `Hi Sir,
 
@@ -794,8 +794,8 @@ const sendDeleteEmail = async (leaveId, name, surname, fromDate, toDate, days) =
     // Construct the email content
     const mailOptions = {
       from: `"Techsa CRM" <${process.env.SMPT_MAIL}>`,
-      //to: "mihir.b@techsa.net", // Replace with actual recipients or use multiple recipients
-      to: "ravi.k@techsa.net, sanjiv.s@techsa.net",
+      to: "mihir.b@techsa.net", // Replace with actual recipients or use multiple recipients
+      //to: "ravi.k@techsa.net, sanjiv.s@techsa.net",
       subject: `Leave Application Deletion Notification`,
       text: `The following leave application has been cancelled:
 
@@ -868,8 +868,8 @@ const leaveExceedEmail = (
 ) => {
   const mailOptions = {
     from: `<${process.env.SMPT_MAIL}>`,
-    //to: "mihir.b@techsa.net",
-    to: "ravi.k@techsa.net, sanjiv.s@techsa.net",
+  to: "mihir.b@techsa.net",
+  //  to: "ravi.k@techsa.net, sanjiv.s@techsa.net",
     subject: "Leave Application Exceeds the Days",
     text: ` ${name} ${surname}, tried to apply for ${days} days, exceeding the limit of 12 days.`,
   };
