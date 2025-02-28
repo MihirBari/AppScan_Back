@@ -1,19 +1,13 @@
 const jwt = require('jsonwebtoken');
 
 const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    //console.log('Authorization Header:', authHeader || 'None provided');
+    // Get the token from the cookies
+    const token = req.cookies.token;
+ //   console.log('Token from cookies:', token || 'None provided');
 
-    if (!authHeader) {
-        console.warn('Authorization header is missing');
-        return res.status(401).json({ message: 'Authorization token is missing' });
-    }
-
-    const token = authHeader.split(' ')[1];
-    //console.log('Extracted Token:', token || 'None extracted');
-
+    // Check if the token is missing
     if (!token) {
-        console.warn('Token is missing in the authorization header');
+        console.warn('Token is missing');
         return res.status(401).json({ message: 'Token is missing' });
     }
 
@@ -23,13 +17,14 @@ const authenticateToken = (req, res, next) => {
         return res.status(400).json({ message: 'Malformed token' });
     }
 
+    // Get the JWT secret key from environment variables
     const secretKey = process.env.JWT_SECRET_KEY;
-    //console.log(secretKey)
     if (!secretKey) {
         console.error('JWT secret key is not set');
         return res.status(500).json({ message: 'Internal server error' });
     }
 
+    // Verify the token
     jwt.verify(token, secretKey, (err, user) => {
         if (err) {
             console.error('JWT Verification Error:', err.message, 'Token:', token);
@@ -39,7 +34,8 @@ const authenticateToken = (req, res, next) => {
             return res.status(403).json({ message: 'Invalid or expired token' });
         }
 
-        req.user = user; // Attach the decoded user information to the request
+        // Attach the decoded user information to the request
+        req.user = user;
         next();
     });
 };
